@@ -33,12 +33,10 @@ var xhr = new XMLHttpRequest();
             document.getElementById("java").innerHTML = cell;
         };
         xhr.send("n=" + n);
-
 }
 
-
 async function calculatePrimesByWasm(n) {
- 		const response = await fetch("calcPrimes.wasm");
+ 	const response = await fetch("calcPrimes.wasm");
         const buffer = await response.arrayBuffer();
         const obj = await WebAssembly.instantiate(buffer);
 
@@ -46,15 +44,14 @@ async function calculatePrimesByWasm(n) {
         var counter = obj.instance.exports.calcPrimes(n);
         var end = Date.now();
         var time = end - start;
-					wasmtimes.push(time);
-
-					var cell = "";
-					for(var i= 0; i < wasmtimes.length ; i++){
-						cell = cell + wasmtimes[i] + " ms<br>";
-					}
-					document.getElementById("wasm").innerHTML = cell;
+	wasmtimes.push(time);
+	
+	var cell = "";
+	for(var i= 0; i < wasmtimes.length ; i++){
+		cell = cell + wasmtimes[i] + " ms<br>";
+	}
+	document.getElementById("wasm").innerHTML = cell;
 }
-
 
 function calculatePrimesByJS(n){
 	var counter = 0;
@@ -91,6 +88,4 @@ function clearResults(){
 	document.getElementById("wasm").innerHTML = cell;
 	document.getElementById("java").innerHTML = cell;
 	document.getElementById("limity").innerHTML = cell;
-
 }
-
